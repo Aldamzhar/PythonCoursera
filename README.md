@@ -117,3 +117,116 @@ x = x+1 (output is 7)
 
 
 x+=3 or x-=3 (x plus 3 or minus 3 on itself)
+
+
+## Input
+
+n = input("Please enter your name: ")
+print("Hello", n)     
+
+[if the n = "Steve"] --> Output: Hello Steve 
+
+## Turtle Graphics 
+
+	import turtle                # make turtle Graphics Library available
+	wn = turtle.Screen()	     # make a screen
+	alex = turtle.Turtle()	     # makes a turtle (arrow), name is alex
+	alex.forward(150)            # forward method, . is access to this method
+	alex.left(90)                # left by 90 pixels
+	alex.forward(75)	     # forward by 75 pixels
+	alex.salary = 50000          # attribute of alex salary is 50000
+	print(alex.salary) 	     # in output console there is 50000
+
+alex is instance of Turtle Class
+wn is instance of Screen Class
+
+forward, left are methods
+
+
+## Herd of Turtles 
+
+	import turtle 
+	wn = turtle.Screen()    # Set up the window and its attribute
+	wn.bgcolor("lightgreen") # The background color of the window is lightgreen
+	
+	tess = turtle.Turtle()  # create a tess and set its pen width with 5 pixels
+	tess.pensize(5)
+
+	alex = turtle.Turtle()  # create alex
+	alex.color("hotpink")  # set his color as a hotpink
+
+	tess.forward(80)
+	tess.left(120)
+	tess.forward(80)
+	tess.left(120)
+	tess.forward(80)
+	tess.left(120)           # tess goes full triangle
+
+	tess.right(180)
+	tess.forward(80)          # turns 180 and goes from the origin away
+
+	alex.forward(50)
+	alex.left(90)
+	alex.forward(50)
+	alex.left(90)
+	alex.forward(50)
+	alex.left(90)
+	alex.forward(50)          # full square by pink alex
+
+	wn.exitonclick()           # if somebody clicks on window, it disappears
+
+
+## For loop
+
+	for var_name in range(3):      # executes this code 3 times, var_name is variable name    
+		[somecode]
+
+	
+
+
+## More Turtle Methods
+
+	import turtle 
+	wn = turtle.Screen()
+	wn.bgcolor("lightgreen")
+	tess = turtle.Turtle()
+	tess.color("blue")
+	tess.shape("turtle") # shape is turtle
+
+	dist = 5
+	tess.up()   # lift the pen up, so line is not drawn behind the turtle        
+
+	for _ in range(30):
+		tess.stamp()  # stamps turtle impression on the window
+		tess.forward(dist)
+		tess.right(24)
+		dist = dist + 2 # makes a spiral in the end
+
+	wn.exitonclick()
+
+	
+alex.speed(10) # 1 is slowest, 10 is highest animation speed, 0 is turn of animation and move as fast as possible
+
+
+## Importing modules
+
+	import random    # randomizer library 
+	
+	prob = random.random() # returns floating point number between 0 and 1 
+
+	diceThrow = random.randrange(1,7) # return an int, one of 1,2,3,4,5,6
+
+
+random.name_of_function() # invoke the function of random library
+
+
+	from random import randrange, random # now we don't have to mention library in the function calls in below 2 invocations  
+	
+	prob = random()
+
+	diceThrow = randrange(1,7)
+
+
+
+
+ 
