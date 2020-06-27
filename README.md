@@ -29,6 +29,9 @@ Order of completion of operations:
 	2) Exponentiation
 	3) Multiplication and Division
 	4) Subtraction and Addition
+	5) Comparison
+	6) Not
+	7) And Or
 
 print(18.0 // 4) ---> prints out 4.0, because 18.0 is float and result would be float too
 
@@ -240,3 +243,319 @@ Semantic error == produces output that is not intended
 NameError == you have used a variable before it has a value
 
  
+## Incremental Programming 
+
+Program and check, program and check each time (one-two steps at a time)
+
+## Common Errors 
+
+
+NameError, SyntaxError, TypeError ==> expression tries to combine 2 objects of types that should not be combined
+
+
+## Sequence mutation
+
+There are 2 ways to change the value of the object you've created:
+
+	1) You can make a modified copy of it
+	2) Modify the original
+
+2) is called mutation
+
+
+## String, Lists and Tuples
+
+All these are the types of sequences
+
+Sequence is an ordered collection, has an order, length
+
+## Strings
+
+String is the sequence of characters
+
+	s = "Hello World"
+
+
+## Lists 
+
+List is a sequence of any type of value 
+
+
+	myList = ["one", 5, "three"]
+
+	print(myList) # prints everything there in square brackets
+
+	List = [] # empty one
+
+
+## Tuples
+
+Tuples are just like lists, but they are immutable (cannot be changed after they have been created)
+
+	myList = ["one", 5, "three"]	# list
+	myTuple = ("one", 5, "three")   # tuple
+		
+	myTuple = (100)  # confused with type int
+	myTuple = (100, ) # class tuple
+	
+	myTuple = () # empty tuple
+
+
+## Index Operator
+
+Indexing allows us access the certain element in the sequence
+
+	s = "Python"
+
+	s[0] # first element
+
+	s[-1] # last element 
+	s[-2] # prelast, same with lists and tuples
+
+## Slice operator
+
+	julia = ("Julia", "Roberts", 1967, "Actress")
+
+	julia[2]  # 1967
+	julia[2:4] # [1967, "Actress"]
+
+	julia[:3] # from beginning to the 3rd, 3rd not included
+
+	julia[5:] # from 5th to the end
+
+## Concatenation and repetition operator
+
+	[1,2] + [3,4]  # [1,2,3,4]
+
+	[0]*4 # [0,0,0,0]
+
+
+## Count and Index
+
+	a = "I have had an apple on my desk before!"
+
+	print(a.count("e"))  # number of e's in a, is 5
+	print(a.count("ha"))  #  ha's are 2
+
+
+works for list too
+
+Index gives the position where the instance met for the first time
+
+	music = "Pull out your music and dancing can begin"
+	bio = ["Metatarsal", "Metatarsal", "Fibula", [], "Tibia", "Tibia", 43, "Femur", "Occipital", "Metatarsal"]
+
+	music.index("m") # 14
+	music.index("your") # 9
+
+	bio.index("Metatarsal") # 0 
+	bio.index([]) # 3
+	bio.index(43) # 6
+
+
+if not in the list, index() gives runtime Error
+
+
+## Split and Join
+
+Split == turns string into list of substrings
+
+
+	song = "The rain in Spain..."
+	wds = song.split() 
+	print(wds) # ["The", "rain", "in", "Spain..."]
+
+	'leaders and best'.split("e") # ["l", "ad", "rs and b", "st"]
+
+Join == takes a list of strings and joins it into one long string
+
+	"/".join(["leaders", "and", "best"])   # "leaders/and/best"
+			
+Append == adds element to the list
+
+	lst.append(elem)
+
+Remove == removing an element inside the list, list is changed but not creating new one
+
+	lst.remove(elem)
+
+## For loop
+
+	List (name is name of loop variable)
+
+	for name in ["1st", "2nd", "3rd"]:
+		print(name)     # prints 1st 
+					 2nd
+					 3rd
+
+	Strings (achar is name of loop variable)
+
+	for achar in "Go Spot Go":
+		print(achar)   # G
+				 o 
+				
+				S and so on
+
+	
+In loops, list or string elements are assigned to loop variables each iteration
+
+## Range function 
+
+	for i in range(0,5):
+		print(i) # prints numbers from 0 to 4, newlined
+
+range(5) ---> [0,1,2,3,4]
+
+
+ 
+## Boolean Expressions
+
+Booleans == truth values: true or false
+
+## Logical Operators 
+
+	expr1 and expr2
+	expr1 or expr2
+	not expr1
+
+
+## In and not in operator 
+
+	'p' in 'apple'  # checks whether thing on the left is part of thing on the right (True)
+	't' not in 'apple' # true
+
+'in' works with lists
+
+
+## Conditional Execution
+
+	if something:
+		somecode
+	else:
+		some other code
+
+OR
+
+	if some:
+		something
+	elif someother:
+		someothercode
+	else:
+		somefinalthing
+
+
+## Mutability 
+
+Lists are mutable (values of it can be changed, it can be prolonged, shortened and so on)
+
+	alist[1:3] = ['x','y'] # replaced 1st and 2nd with x and y
+
+
+Strings aren't mutable (can't change the characters or strings themselves)
+
+
+Can create new string and take a slice of old one
+
+## List element deletion
+
+	a = [1,2,3]
+	del a[1] # now a is [1,3]
+
+
+	alist = [1,2,3,4,5,6]
+	del alist[1:5] # a is [1]
+
+
+## Objects and references
+
+	a = "banana"
+	b = "banana"
+
+	a is b # true
+
+is asks whether a and b are pointing or referencing the same object (string banana)
+
+it works that way with strings 
+
+
+But with lists 
+
+	a = [1,2,3]
+	b = [1,2,3]
+
+	a is b # false, a points to one, b points to another but with same contents
+
+	a == b # true, cause contents are the same 
+
+	id(a) # ids of objects 
+	id(b) #	
+
+
+# Aliases
+
+if you change one of two aliases bound to the same object, then second one is also changed 
+
+	a = [1,2,3]
+	b = [1,2,3]  # different objects
+
+	a is b # false
+
+	b = a # now point to the same object
+
+	a == b # true
+	a is b # true
+
+	b[0] = 5 # b is [5,2,3], and a is [5,2,3] too
+
+
+## Cloning lists
+
+Cloning list makes entirely new copy of older list, but objects are not connected, it is just a copy
+
+	a = [1,2,3]
+
+	b = a[:] # cloning, making exact copy
+
+	b[0] = 5 # b is [5,2,3], but a is [1,2,3]
+
+
+
+When concatenating list to older one, it just extends older one, but not affecting aliases
+
+
+## Methods on Lists
+
+.append() # adds to the end of the list
+
+.insert(position_to_insert_to, the_element_to_insert) # goes there, insert the element even if between existing elements
+
+.count(value) # how many of the elements in list equal to value?  
+
+.index(value) # at which position value can be found
+
+.reverse() # reverse the list, same list 
+
+.sort() # from smallest to biggest
+
+.remove(element) # element is removed from the list
+
+.pop() # removes the last element from the list
+
+
+## Append VS Concatenate
+
+.append() # adds to the end of the list, same list remains
+
+lst = lst + some_list # makes a copy of the same list but with addition from the some_lis
+
+	origlist = [1,2,3] 
+	aliaslist = origlist  # aliaslist ---- (both point to the list)
+				origlist ----|--> [1,2,3]
+	
+	origlist += ["cat"] # now, origlist ----> [1,2,3,"cat"]--
+				   aliaslist -------------------| same changes applied to aliaslist 
+	origlist = origlist + ["cow"]
+
+## Non-mutating methods on Strings
+
+
