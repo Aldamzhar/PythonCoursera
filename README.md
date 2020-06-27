@@ -227,6 +227,16 @@ random.name_of_function() # invoke the function of random library
 	diceThrow = randrange(1,7)
 
 
+## Debugging (Syntax, Runtime and Semantic Errors)
 
+Syntax error == statements aren't well formed, interpreter can't parse it
+
+Runtime error == illegal operation happened (3/0 or 5/0)
+
+Semantic error == produces output that is not intended 
+
+## Know your Error Messages 
+
+NameError == you have used a variable before it has a value
 
  
