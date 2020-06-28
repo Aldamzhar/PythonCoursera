@@ -558,4 +558,22 @@ lst = lst + some_list # makes a copy of the same list but with addition from the
 
 ## Non-mutating methods on Strings
 
+These are the methods that produce a new one based on the old one
 
+.upper() # all capital letters in new str
+
+.lower() # all letters are lowered 
+
+.count("Some_string") # number for occurences of some_string in the string itself
+
+.strip() # gets rid of the whitespaces in beginning and at the end
+
+.replace("old_substring", "new_substring") # creates a new string but replaced the old chunk with new chunk, but original remain the same
+
+str() # typecast into the string type
+
+"String {}. This is {}".format(name1, name2) # String name1. This is name2
+
+"{:.2f} ...".format(somestr) # :.2f is floating point number, 2 digits after decimal point, more precise, default is 3 decimal places
+
+ 
