@@ -577,3 +577,102 @@ str() # typecast into the string type
 "{:.2f} ...".format(somestr) # :.2f is floating point number, 2 digits after decimal point, more precise, default is 3 decimal places
 
  
+## Reading a file 
+
+Open the file:
+
+	fileref = open("file.txt", "r") # r for read, returns the file object
+
+After some manipulation and actions, close the file
+
+	contents = fileref.read() # read function returns all contents of a file, in one string
+
+
+
+	lines = fileref.readlines() # returns a list of strings, one string for each line in the file 
+
+	print(lines[:4]) # returns first 4 lines of file as a list
+
+
+	for line in fileref: # go over the whole file 
+		print(line.strip()) # and extract line by line without newlines (strip gets rid of whitespaces, newlines)
+
+
+
+	print(contents[:100]) # first 100 characters of these contents
+
+	fileref.close() # closing the file 
+
+	
+## Finding a file in FileSystem 
+
+If you have a Python Program in a directory and you have to access the file in a parent one, then you have to get up a level
+
+	somefile = open('../somefiledir/somefile.txt')  # relative path
+
+.. means go up a level in a parent directory
+
+	somefile = open('/user/adminname/files/projs/data.txt') # absolute path (not preferable)
+
+
+## Writing to a file
+
+	file_obj = open("squares.txt", "w")
+
+	for number in range(13):
+		square = number**2
+		file_obj.write(str(square)) # writing to a file 13 squared numbers from 0 to 12 
+		file_obj.write('\n')	
+
+	file_obj.close()
+
+
+We still can access the file even if it's closed for reading when didn't reload the page 
+
+	new_file_obj = open("squares.txt", "r")
+	print(new_file_obj.read()[:10]) # prints first 10 characters inside the file
+
+
+## Using 'with' for Files
+
+	with open('mydata.txt', 'r') as md:     # equivalent of 'md = open('mydata.txt', 'r')'
+		for line in md:
+			print(line)             # after that line, 'md.close()' occurs behind the scenes, we don't have to explicitly write that line, because with does it for us
+
+
+## .csv format 
+
+'csv' stands for Comma Separated Values 
+
+just a text file that follows some conventions, values are going to be separated by a comma, 
+every line of the file will have the same structure  
+
+						
+## Reading a .csv file 
+
+	fileconnection = open("olymics.txt","r")
+	lines = fileconnection.readlines() # list of lines
+	for lin in lines[:6]:
+		print(lin.strip()) # printing individual line without newlines
+
+	header = lines[0]
+	field_names = header.strip().split(',') # take the 0th element of the list, which is string  and split it, which means create a list of its substrings of that string
+	print(field_names) # ['1st','2nd', '3rd']
+
+	
+## Writing to a .csv file 
+
+	outfile = open("reduced_olympics.csv", "w")
+
+	outfile.write('name,age,sport')
+	outfile.write('\n')
+
+	outfile.close()
+
+Use format to then input it to csv file
+
+Can use join method too, but confusing
+
+Concatenation but not recommended
+
+
