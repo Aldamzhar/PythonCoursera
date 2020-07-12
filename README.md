@@ -676,3 +676,81 @@ Can use join method too, but confusing
 Concatenation but not recommended
 
 
+## Dictionaries
+
+Dictionaries are unordered collection of items, bag of key/value pairs
+
+	eng2sp = {} # Creating a dictionary
+
+	eng2sp['one'] = 'uno' # one key and one value, key = 'one', value = 'uno'
+	eng2sp['two'] = 'dos' # Create another key value pair
+	eng2sp['three'] = 'tres'
+
+Keys can be almost any type of object and values can be any type of object
+
+
+Also can declare dictionary like this:
+
+	eng2sp = {'one':'uno', 'two':'dos', 'three':'tres'}
+
+Access the value of the key:
+
+	eng2sp['one'] # will be 'uno'
+
+
+	
+## Dictionary Operations
+
+	inventory = {'apples':430, 'bananas':312, 'oranges':525, 'pears':217}
+
+	del inventory['pears'] # Get rid of key value pair (pears 217)
+
+	inventory['pears'] = 0 # Update the value of key 'pears', now 0 
+
+	numItems = len(inventory) # Returns number of key-value pairs in this dictionary, it is 4
+
+## Dictionary Methods
+
+	inventory = {'apples':430, 'bananas':312, 'oranges':525, 'pears':217}
+
+	for key in inventory.keys(): # .keys() method gets all the keys from dictionary, doesn't matter in which order
+		print(key, "has the value", inventory[key]) # and then access all the values associated with each key
+
+	key = list(inventory.keys()) # make the list of keys a list by list() method
+
+	
+	for key in inventory: # also returns just keys
+		print(key)
+
+	
+	inventory.values() # all values of keys
+	inventory.items() # items of key-value pairs written in tuples
+
+	
+	'apples' in inventory # boolean value, True as the key is in dictionary
+
+
+	inventory.get('apples') # same as inventory['apples'] = 312 as output
+
+But if the key was not in dictionary, say 'cherries'
+
+	inventory['cherries'] # will get the KeyError
+	inventory.get('cherries') # will be output: None
+
+Also, if the key is not here, and there is a second parameter added in get() function, such as 0,  then make the output value associated with this key 0, instead of None
+	
+	inventory.get('cherries',0) # Output will be 0, but key-value pair of this is not added 
+
+
+## Aliasing and copying with Dictionaries
+
+	opposites = {'up':'down', 'right':'wrong', 'true':'false'}
+	alias = opposites # points to exact same object as opposites
+
+	print(alias is opposites) #  True
+
+	alias['right'] = 'left' 
+ 	print(opposites['right']) # now it is left, because they are connected 
+
+
+
