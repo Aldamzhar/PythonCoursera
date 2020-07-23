@@ -754,3 +754,78 @@ Also, if the key is not here, and there is a second parameter added in get() fun
 
 
 
+## Packages 
+
+Packages = directory of Python Scripts
+
+Each script = module 
+
+Specify functions, methods and types
+
+Thousands of packages available: numpy, matplotlib, Scikit-learn
+
+pip = package management system on python
+
+importing package to use
+
+```python
+import numpy as np
+
+np.array([1,2,3])
+```
+
+## Numpy
+
+Numeric Python = Alternative to Python List
+
+Calculations over entire arrays
+
+Easy and fast
+
+
+```python
+import numpy as np
+
+np_height = np.array(height)
+
+np_weight = np.array(weight)
+
+bmi = np_weight/np_height**2 # works fine in numpy but errors with list
+```
+
+Numpy arrays contain only one type!
+
+
+## 2D numpy arrays
+
+Just create a list of lists in numpy arrays
+
+.shape # (2,5) 2 rows, 5 columns
+
+np_2d[0][2] # 3rd element of 1st list
+
+np_2d[0,2] # same
+
+
+np_2d[:, 1:3] # take elements from 1st to 3rd index not included, in all lists
+
+np_2d[1, :] # take everything from 2nd list
+
+
+## Basic Statistics with numpy
+
+.mean() # mean value 
+
+.median() # median
+
+.corrcoef() # correlation between values
+
+.std() # standard deviation
+
+.sum(), .sort() # others, but fast! Because in numpy array, every element is of the one type
+
+.normal() # normalize
+
+.column_stack() 
+
+
