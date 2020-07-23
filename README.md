@@ -829,3 +829,175 @@ np_2d[1, :] # take everything from 2nd list
 .column_stack() 
 
 
+## Object Oriented Programming
+
+OOP = Flexible, powerful paradim where classes represent and define concepts, while objects are instances of classes
+
+Attributes = characteristics associated with the type
+
+Methods = functions associated with the type
+
+Example:
+
+Apple = class
+
+Flavor and color = attributes
+
+Cut, eat = methods 
+
+
+```python
+dir("") # will show all attributes and methods related to a class<string> ("")
+help("") # will show all documentation to the corresponding class of an object 
+```
+
+__methodname__ methods are usually not called explicitly but called internally in Python
+
+for example, __len__ is called by len() function which we may call in a program
+
+
+## Defining new classes
+
+```python
+class Apple: # class keyword for defining class
+    flavor = "" # defining attributes flavor and color for apple class
+    color = ""  
+	
+
+jonagold = Apple() # create a new object of class Apple 
+
+jonagold.flavor = "sweet"
+jonagold.color = "red"
+
+print(jonagold.color.upper()) # RED
+print(jonagold.flavor) # sweet
+
+```
+
+"." Dot notation = lets access to any of the methods and attributes object has
+
+
+## Instance Methods
+
+```python
+Class Piglet:
+  name = "piglet"
+  def speak(self): # self represents the instance that the method is being executed on
+    print("oink! I'm {}!".format(self.name)) # This means that it accesses the attribute name from the current instance of Piglet
+
+hamlet = Piglet()
+
+```
+
+## Constructors and Other special methods
+
+Constructor = method that is called when you call the name of the class
+
+```python
+class Apple:
+  def __init__(self, color,flavor): # always named "init"
+    self.color = color
+    self.flavor = flavor
+  def __str__(self):
+    return "This apple is {} and {}".format(self.color, self.flavor)
+
+jonagold = Apple("red", "sweet") 
+print(jonagold) # prints now the message cleaner than bunch of numbers saying position at a computer's memory, str special method helped us
+```
+
+## Documenting Functions, Classes and Methods
+
+Docstring = brief text explains what something does
+
+```python
+help(Apple) # Shows documentation on what methods there are in our defined class
+
+def to_seconds(hours, minutes, seconds):
+  """Returns the amount of seconds in given hours, minutes and seconds"""
+  return hours*3600 + minutes*60 + seconds
+
+help(to_seconds) # shows the comment in function that briefly explains it	
+```
+
+## Inheritance
+
+Inheritance = lets programmer build relationships between concepts and group them together
+
+This allows us to reduce code duplication by generalizing our code
+
+```python
+class Fruit:
+  def __init__(self, color, flavor):
+    self.color = color
+    self.flavor = flavor
+
+class Apple(Fruit):
+  pass
+
+class Grape(Fruit): # Apple and Grape classes inherit from Fruit class, they are called siblings
+  pass 
+
+g_smith = Apple("green", "tart")
+carnelian = Grape("purple", "sweet")
+```
+
+Inheriting classes will have the same attributes and methods in children classes 
+
+We can make them behave differently
+
+```python
+class Animal:
+  sound = ""
+  def __init__(self,name):
+    self.name = name
+  def speak(self):
+    print("{sound} I'm {name}! {sound}".format(name = self.name, sound=self.sound))
+
+class Piglet(Animal):
+  sound = "Oink!"
+
+hamlet = Piglet("Hamlet")
+hamlet.speak() # Oink! I'm Hamlet! Oink!
+
+class Cow(Animal):
+  sound = "Moooo"
+
+milky = Cow("Milky White")
+milky.speak() # Moooo I'm Milky White! Moooo
+```
+
+
+## Composition
+
+Composition = use of the code in the other classes by calling their methods
+
+Always initialize mutable attributes in a constructor!!!
+
+```python
+class Repository:
+  def __init__(self):
+    self.packages = {}
+  def add_package(self, package):
+    self.packages[package.name] = package
+  def total_size(self):
+    result = 0
+    for package in self.packages.values():
+      result += package.size
+    return result
+```
+
+## Python Modules 
+
+Modules = used to organize functions,classes and other data together in a structured way
+
+Python Standard Library
+
+```python
+import random
+import datetime
+
+now = datetime.datetime.now() # date and time right now
+now.year # 2020
+random.randint(1,10) # generate random number between 1 and 10
+```
+
