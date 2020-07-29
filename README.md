@@ -938,6 +938,53 @@ When the function is easy to write and simple, then make lambda expression, othe
 
 
 
+## JSON Format and JSON Module
+
+JSON = JavaScript Object Notation = standard format defined that makes it easy to share that data (nested lists and dictionaries)
+
+Python makes it pretty easy to both read in and write out data in JSON format
+
+JSON format looks exactly like the printout of a Python list or dictionary
+
+There are 2 powerful methods of JSON module in Python: 
+
+1) json.loads(string)
+2) json.dumps(list or dictionary)
+
+```python
+import json
+
+a_string = '\n\n\n{\n "resultCount":25,\n "results": [\n{"wrapperType":"track", "kind":"podcast", "collectionId":10892}]}'
+
+d = json.loads(a_string) # takes string as input and returns a dictionary or a list
+
+print(type(d)) # because in the string, first symbol among whitespace and newlines was { curly brace, then the return value will be <class 'dict'>
+print(d.keys()) # ['resultCount', 'results']
+print(d['resultCount']) # 25
+
+
+
+def pretty(obj):
+  return json.dumps(obj, sort_keys=True, indent=2) # takes list or dictionary and converts it into a string that's in the JSON format, obj is list or dict, sort_keys = True means output in alphabetical order, indent = 2 means 2 character indents that will prettify the string
+     
+d = {'key1': {'c':5, 'a':90, 5:50}, 'key2': {'b':3, 'c':'yes'}}
+
+print(d) # same inline
+print(pretty(d)) # 
+
+{
+  "key1":{
+    "5":50,
+    "a":90,
+    "c":5
+  },
+  "key2":{
+    "b":3,
+    "c":"yes"  
+  }	
+}  prettifying the output
+```
+
 ## Packages 
 
 Packages = directory of Python Scripts
