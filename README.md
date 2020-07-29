@@ -985,6 +985,111 @@ print(pretty(d)) #
 }  prettifying the output
 ```
 
+## Shallow copies
+
+If we take some list and make it as a full slice:
+
+```python
+original = [[some1], [some2]]
+copied_version = original[:] # it will take same contents as original, but will point to different objects
+```
+However when we mutate the list in the list of original as example, changes will affect copy too (CONFUSION!)
+
+## Deep Copies
+
+Deep copy is when you will go through the nested loops and fulfill the list one by one
+
+Create an empty list, then go and fill, therefore, if changes in original happen, it has no impact on copied one
+
+There is a module called 'copy' that performs the recursion behind the scenes
+
+```python
+import copy 
+
+original = [[some, [s1,s2]], [some2, [s3,s4]]]
+
+shallow = original[:]
+deep = copy.deepcopy(original) # takes a sequence as value, produces the deep copy of nested levels
+```
+
+## Extracting from Nested Data
+
+JSON Online Editor
+
+Use it to deduce what to index and what to access in order to retrieve data you want to have
+
+## Map
+
+Map function makes a new list where each item in original list is transformed in some way
+
+Map = function that takes sequence as 2nd input and function as 1st input
+
+```python
+def triple(value):
+  return 3*value
+
+def tripleStuff(a_list):
+  new_list = map(triple, a_list)
+  return new_list
+
+def quadrupleStuff(a_list):
+  new_list = map(lambda value: 4*value, a_list)
+  return new_list
+
+things = [2,5,9]
+things3 = tripleStuff(things)
+print(things3) # [6,15,27]
+
+things4 = quadrupleStuff(things)
+print(things4) # [8,20,36]
+```
+
+## Filter
+
+Filter = start with some items and end up with fewer of them
+
+Filter function takes two parameters, first is expression (lambda) and second is sequence (list)
+
+Filter returns True if item should be kept and False if it should be filtered out 
+
+```python
+def keep_evens(nums):
+  new_seq = filter(lambda num: num % 2 == 0, nums) # normally returns iterators in Python just like .keys() method
+  return list(new_seq)  # therefore it is better to convert it into list
+
+print(keep_evens([3,4,6,7,0,1])) # [4,6,0]
+```
+
+## List Comprehensions
+
+```python
+things = [2,5,9]
+
+yourlist = [value*2 for value in things] # creating a list (square brackets, transformer expression (value*2) )
+
+print(yourlist) # [4,10,18]
+```
+General template for list comprehension:  [<transformer_expression> for <varname> in <seq> if <filtration_expression>]
+
+## Zip
+
+Zip = takes two sequences and zips them together matching their 1st,2nd and so on items together
+
+Useful for pairwise comparisons and combinations
+
+Zip function takes two or more sequences and makes a list of tuples
+Each tuple gathers together the items from the corresponding position in the list
+
+
+```python
+L1 = [3,4,5]
+L2 = [1,2,3]
+L4 = list(zip(L1,L2)) # returns actually an iterator; list like object
+print(L4) # It is still going to have 3 elements but each of them is a pair of numbers (3,1), (4,2), (5,3)
+L3 = [x1+x2 for (x1,x2) in list(zip(L1,L2))] # makes a list of tuples and makes them add each other and create a list of those results of additions
+```
+
+
 ## Packages 
 
 Packages = directory of Python Scripts
