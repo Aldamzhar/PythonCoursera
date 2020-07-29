@@ -1,6 +1,6 @@
-# PythonCoursera
+# Python3 Programming course on Coursera
 
-## This is the repo for the Coursera course on Python and everything I learned from it
+## This is the repo for the Coursera courses on Python and everything I learned from them
 
 
 Python Interpreter = it is the program that runs behind the scenes, which takes 
@@ -753,6 +753,190 @@ Also, if the key is not here, and there is a second parameter added in get() fun
  	print(opposites['right']) # now it is left, because they are connected 
 
 
+Namespace is an environment where all names are unique
+
+In Python, there was one global or top-level namespace, then each invocation of a function creates a new namespace
+
+Implicit tuple packing is when Python automatically packs the values written by comma into one tuple without explicitly marking parentheses
+
+Unpacking tuple conveniently:
+
+```python
+name, age = julia # julia is tuple of ("Zane", 23) for example
+```
+Passing tuple to a function:
+
+```python
+def add(x,y)
+  return x + y
+
+print(add(3,4))
+z = (5,4)
+print(add(*z)) # unpacking the tuple by sending as a parameter with asterisk to a function
+print(add(z)) # without it, there will be TypeError of 1 given argument instead of 2
+```
+
+Listener loop is the while loop which terminates if the input variable in condition is met
+
+Listens to the input() from the user 
+
+## Optional parameters
+
+```python
+def f(a, L=[]):
+  L.append(a)
+  return L
+
+f(1) # After this, list is [1]
+f(2) # [1,2]
+f(3) # [1,2,3] When we mutate the default parameter, it can affect the future function calls
+f(4,["Hello"]) # Separate list, separate object ["Hello", 4]
+f(5,["Hello"]) # ["Hello", 5]
+```
+
+## Keyword parameters
+
+```python
+def f(x, y=3, z=7):
+  code
+
+f(x=1, z=5) # y is 3, and x and z are specified, keyword parameters
+
+f(z=5, x=4) # order is not important
+```
+keyword parameter should always come after positional arguments like this:
+
+f(10,z=4)
+
+## Lambda expressions
+
+Lambda expressions are alternative ways to define function
+
+```python
+def func(args): #usual way
+  return ret_val
+
+func = lambda args: ret_val # lambda expression
+
+lambda args:ret_val # return is implicit, anonymous lambda function 
+```
+
+## Sorting
+
+We do sorting in Python by sort() and sorted() functions
+
+### Sort function
+
+```python
+L1 = [1,7,4,2,-3]
+L2 = ["Cherry", "Apple", "Blueberry"]
+
+L1.sort() # Usually from lowest to highest
+print(L1) # [-2,1,3,4,7]
+L2.sort() # Usually alphabetically from a to z
+print(L2) # ["Apple", "Blueberry", "Cherry"]
+```
+
+### Sorted function
+
+There are definite differences between sorted and sort methods
+
+1) Here, we use function syntax instead of method syntax
+2) We are getting the value back here and assign in to variable
+3) When we invoke sorted() on a list, it doesn't change original one, produces new list with different order
+
+```python
+L2 = ["Cherry", "Apple", "Blueberry"]
+
+L3 = sorted(L2)
+print(L3)  # ["Apple", "Blueberry", "Cherry"]
+print(sorted(L2)) # ["Apple", "Blueberry", "Cherry"]
+print(L2) # unchanged, same as before
+
+
+L2.sort()
+print(L2) # ["Apple", "Blueberry", "Cherry"]
+print(L2.sort()) # return value is None
+
+print(sorted("Apple")) # ['A', 'e', 'l', 'p', 'p']
+```
+
+## Optional Reverse Parameter
+
+```python
+L2 = ["Cherry", "Apple", "Blueberry"]
+print(sorted(L2, reverse=True)) # ["Cherry", "Blueberry", "Apple"] reverse alphabetical order
+```
+
+## Optional Key Parameter
+
+```python
+L1 = [1,7,4,-2,3]
+
+def absolute(x):
+  if x >= 0:
+    return x
+  else:
+    return -x
+
+L2 = sorted(L1, key=absolute) # here we pass the function as parameter in another function
+print(L2) # [1,-2,3,4,7]
+L2 = sorted(L1, key=lambda x: absolute(x))
+print(L2) # [1,-2,3,4,7]
+
+print(sorted(L1, reverse = True, key = absolute)) # [7,4,3,-2,1]
+```
+Behind the scenes, when sorted() function is called, it subsequently calls the function absolute for each of the items in the list, and then sorts them based on what they turn into as the result of function absolute for example
+
+## Advanced Sorting (Dictionaries, Breaking Ties)
+
+### Sorting Dictionary's keys
+
+```python
+L = ['E', 'F', 'B', 'A', 'D', 'I', 'I', 'C', 'B', 'A', 'D', 'D', 'E', 'D']
+
+d = {}
+for x in L:
+  if x in d:
+    d[x] = d[x] + 1
+  else:
+    d[x] = 1
+
+
+for x in sorted(d.keys()): # will be A appears .., B appears .. , C appears, sorting by keys
+  print("{} appears {} times".format(x,d[k])) 
+
+for x in sorted(d.keys(), key=lambda k: d[k]) # will be .. appears 1, .. appears 1 , .. 2, .. 2, .. 4, sorting by values
+
+
+for x in sorted(d.keys(), key=lambda k: d[k], reverse = True) # will be .. 4, ..2 , ..1 and so on, sorting by values from highest to lowest
+```
+
+### Breaking Ties
+
+When we sort tuples we sort them by their first value
+
+But if they are comparing first values and they are equal, they are going to compare second ones, and so on  (Breaking Ties)
+
+We can make a tie breaking property to sort lists for example
+
+```python
+fruits = ['peach', 'kiwi', 'apple', 'blueberry', 'papaya', 'mango', 'pear']
+new_order = sorted(fruits, key=lambda fruit_name: (len(fruit_name), fruit_name))
+for fruit in new_order:
+  print(fruit) # kiwi, pear, apple, mango, peach, papaya, blueberry (first small length words, then big length words in the end, and if there is a tie between same lengthed , we will compare them by alphabetical order) 
+
+new_order = sorted(fruits, key=lambda fruit_name: (-len(fruit_name), fruit_name))
+for fruit in new_order:
+  print(fruit) # blueberry, papaya, apple, mango, peach, kiwi, pear (Reverse order of list but the alphabetical order is preserved, and we changed the property of longest to shortest words)
+
+```
+
+## When to use a lambda expression
+
+When the function is easy to write and simple, then make lambda expression, otherwise use name functions
+
+
 
 ## Packages 
 
@@ -1000,4 +1184,144 @@ now = datetime.datetime.now() # date and time right now
 now.year # 2020
 random.randint(1,10) # generate random number between 1 and 10
 ```
+
+## Final Project
+
+Problem statement:
+
+We need to process a list of Event objects using their attributes to generate a report that lists all users currently logged in to the machines.
+
+
+Research:
+
+We need to know how we can sort the stuff in Python
+
+```python
+numbers = [4,6,2,7,1]
+numbers.sort() 
+print(numbers) # [1,2,4,6,7]
+
+names = ["Carlos", "Ray", "Alex", "Kelly"]
+print(sorted(names)) # ["Alex", "Carlos", "Kelly", "Ray"]
+print(names) # ["Carlos", "Ray", "Alex", "Kelly"]
+
+print(sorted(names, key=len)) # output will be ["Ray", "Alex", "Kelly", "Carlos"], here, ascending order of lengths of names
+```
+
+So, sort() function changes the list itself, but sorted() method creates a new list sorted, without changing the original
+
+However, sorted() method can take second parameter as for the criteria for which to sort
+
+
+```python
+def get_event_date(event):
+  return event.date
+
+def current_users(events):
+  events.sort(key = get_event_date)
+  machines = {}
+  for event in events:
+    if event.machine not in machines:
+      machines[event.machine] = set()
+    if event.type = "login":
+      machines[event.machine].add(event.user)
+    elif event.type = "logout":
+      machines[event.machine].remove(event.user)
+  return machines
+
+
+def generate_report(machines):
+  for machine, users in machine.items():
+    if len(users) > 0:
+      user_list = ", ".join(users)
+      print("{}: {}".format(machine, user_list))
+```
+
+
+
+
+# Using Python to Interact with Operating System course
+
+Operating system = software that manages everything that goes on the computer
+
+There are 2 main parts of operating system:
+
+1) Kernel = main core of OS, it talks directly to our hardware and manages our system's resources. Users don't interact with Kernel directly
+
+2) User space = everything outside of kernel, users interact directly with it, like system programs and user interface
+
+Linux is the name of the kernel developed originally by Linus Torvalds
+
+Because Linux is open source OS, many organizations package their own versions of it = called distributions
+
+Some common are Ubuntu, Debian and Red Hat. Also Chrome OS but is usually considered an OS in its own right
+
+Android OS also runs on Linux Kernel
+
+Unix is OS developed back in 70's by Bell Labs
+
+Linus created Linux which is based on Unix
+
+MacOS kernel and some of its user space are also based on kernel and user space of the Unix family known as BSD
+
+
+## Interpreted vs Compiled Languages
+
+Compiler = software, which translates the source code into machine level language
+
+It can make compiled program super fast to run, but compilation process itself can take time
+
+Compiled languages: C, C++, Go, Rust
+
+
+Interpreter = program to execute the instructions specified in the code
+
+Interpreted languages generally run slower than compiled ones
+
+Interpreted languages: Python, Ruby, JavaScript, Bash, PowerShell
+
+
+Mixed approach languages: Java, C#
+
+The code needs to be compiled first but it gets compiled into intermediate code, that can execute on different platforms
+
+We execute the code using a program that's OS specific: Java Virtual Machine for Java, and Common Language Runtime for C#
+
+
+
+Python Interpreter itself is a compiled executable that's platform specific, but I can run my scripts everywhere once I have it installed
+
+
+`cat _filename_` = command on terminal, shows the contents of file on Linux
+
+
+To avoid writing python3 line to execute the code in terminal, we can add the extra line to our file called 'shebang' which tells the OS which command we want to use to execute that script
+
+Open the editor --> here, can use 'nano' filename.py --> `#!/usr/bin/env python3` type this into the beginning of script --> save it --> make the script file executable --> chmod +x filename.py --> ./filename.py --> Done
+
+We need to add './' when executing the script, because the script isn't located in any of the directories listed in PATH variable.
+
+PATH variable = tells OS where to find programs to execute
+
+. in './' expression represents the current directory
+
+
+## Own Python Modules 
+
+import filename 
+
+If I have a module that split into separate files, and I want to recognize the directory has a module, i need to create init.py file
+
+In order for interpreter to recognize the directory as a Python module, we need to create init.py
+
+## IDE
+
+IDE = Integrated Development Environment = code editor with handy extra capabilities that make writing scripts a lot easier 
+
+One of the features in IDEs is __Syntax Higlighting__ = means the editor recognizes the language of code and makes up syntax of language 
+
+Code completion feature 
+
+Vim, Atom, VS Code = editors 
+
 
