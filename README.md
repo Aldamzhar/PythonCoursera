@@ -1260,6 +1260,47 @@ print(type(x)) # list
 print(x[0]) # first element in the list
 print(json.dumps(x, indent=2)) # pretty print the results, the list
 ```
+
+## Using REST APIs
+
+### Generating URLs with requests.get
+
+Sometimes, out of simple URL, we have to go to some particular sections and pages of website, for this we can do the following:
+
+```python
+import requests
+
+kval_pairs = {'rel_rhy':'funny'}
+page = requests.get('https://api.datamuse.com/words', params=kval_pairs) # here, we take params as dictionary with key value pair
+
+print(page.url) # https://api.datamuse.com/words?rel_rhy=funny
+```
+
+There are some complicated examples such as this:
+
+```python
+import requests
+
+d = {'q':'violins and guitars', 'tmb':'isch'}
+results = requests.get('https://google.com/search', params=d) 
+print(results.url) # https://google.com/search?q=violins%20and%20guitars&tmb=isch
+```
+ 
+If we copy and paste into the browser that URL, we will get the search for the images in the tab (tmb=isch) of violins and guitars (REAL QUERY)
+
+In order to know what to put into the base part, like key=value pairs, you have to read the documentation of the API
+ 
+Errors of generating URL could be because of:
+
+1) one of the keys or values are not a string
+2) one of the keys or values is not received by API
+3) It is not dictionary that was passed to params parameter
+
+Requests with cache are needed to make the expensive operation of searching throughout the internet for the content, it will search it one time, and then store it in cache. For the further requests it will just get the content from the file where we saved our content
+
+.get() method here, will look for the cache, and if the content is not there, it is going to call real .get() method and store the content in cache for further retrieval
+
+In this requests_with_caching module, there are 2 caches implemented, the stuff that we save for 1st time goes to permanent cache, and temporary cache = there is a stuff that's saved between code runs while on current page, but as soon as page reloads, it disappears
  
 ## Packages 
 
