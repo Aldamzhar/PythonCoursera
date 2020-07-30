@@ -1089,7 +1089,178 @@ print(L4) # It is still going to have 3 elements but each of them is a pair of n
 L3 = [x1+x2 for (x1,x2) in list(zip(L1,L2))] # makes a list of tuples and makes them add each other and create a list of those results of additions
 ```
 
+## Requesting Data From the Internet
 
+### REST API
+
+API = Application Programming Interface = interface that lets one computer program interact with another computer program.
+
+REST = Representation State Transfer
+
+REST API means website that produces data intended for another computer program to consume rather than something intended to be displayed to people in a browser
+
+REST API will respond to requests in particular format 
+
+
+### URLs, Domain Names, and IP addresses
+
+The template of website URL: {protocol}://{server}/{arguments}
+
+Server says where to fetch something from and arguments say what to fetch from that remote server
+
+Protocol says how to communicate with that remote server
+
+__Host(Server) names__ (Domain name)
+
+__Host name__ is a name for specific computer you're communicating with
+
+Every computer that's attached to the internet has a unique identifier, an address called __IP (Internet Protocol) address__
+ 
+No two computers connected to the internet can have the same IP address at the same time
+
+When the computer disconnects, you might get another computer to reuse that IP address
+
+When we have a domain name like google.com, that's of a more permanent name but the actual server that is responding to that name may change over time and each server will have an IP address 
+
+Internet has something called __DNS (Domain Name System)__ = the setup to resolve the names like google.com and turn them to these unique identifiers, the IP addresses
+
+IP address will look like 159.89.239.247 (3 dots just to divide the 4 chunks) 
+
+Each of these chunks should have a number between 0 and 255
+
+You can represent that with eight bits, eight zeros and ones
+
+We got 4 sets of 8 bits, total of 32 bits, therefore sometimes these are called 32-bit addresses 
+
+There's a distributed lookups system, the DNS and you can go to various sites that will let you do this lookup
+
+My computer has a way of doing that lookup, it has a server that it talks to in the background
+
+### Routing
+
+When the browser talks to some remote server, say google.com, it establishes connection and then it sends some data, pieces of text or some other formatting data, and each of those pieces of content gets chopped up into a bunch of packets
+
+Each of those small packets gets sent out onto this big routing system that consists of a whole bunch of routers
+
+Routers = computers whose sole purpose is to receive these data packets and pass them on
+
+Each packet goes from one router to next
+
+Each of those routers has a big lookup table that says "If this packet that i've received is destined for some particular address, what's the next hop? What's the next router I should send it to?"
+
+Magically all of these routers have managed to coordinate their routing tables, so that when a packet gets sent here, it evenrually makes its way to the destination 
+
+As an example: for diagnostics about if i'm trying to send data packets from computer to google.com
+
+```
+traceroute google.com
+
+1 100.68.0.5 (100.68.0.5)  71.102 ms 36.587 ms 58.474 ms
+2 143.24.43.5 (same here)   some speeds
+3 10.255.255.254 (same here) some speeds
+...
+```
+
+1st line here tells me where does that packet go first, and it goes to computer that has the IP address 100.68.0.5 and it took 71.102 ms to get it there first time, 2nd time is 36, 3rd time is 58ms
+
+2nd line here tells me that if packets successfully went to 1st, where does it go next. It went from 100.68.0.5 to computer with 143.24.43.5. Same with first  
+ 
+and so on
+
+### HTTP: Behind the scenes
+
+What happens behind the scenes when the browser fetches the data from a remote server?
+
+(1) One way is by having an http protocol
+
+First, it is going to take the domain name after http:// and convert it into an IP address 
+
+Then the computer makes a connection to the remote computer 
+
+(2) Second way is using https, which is more secure version of http protocol
+
+First thing that it is going to do is computer would send some info back and forth to the google.com server as example that would establish the encryption keys so that all of the rest of the communication would be encrypted and nobody who intercepted that communication would be able to figure out what we were saying to each other 
+
+After the setup, the browser will start to send messages and it will actually send text, it'll send the word "GET" and then whatever arguments were after the slash 
+
+It will say what path we're looking for and also it will send some headers saying things like, "It is Chrome Browser, current time stamp and other headers"
+
+Then we will receive back from that server some response headers
+
+And it will say "I'm sending HTML and other headers, timestamp" 
+
+Most importantly, google.com is going to send me some HTML, and that HTML my browser is going to take and turn it into a webpage in a browser
+
+So, browser renders HTML
+
+### URL Query Parameters
+
+After the slash, there is a very commom path name, for example, 'list' and then question mark, and after it we got query parameters
+
+Example: 'https://google.com/list?filter=tags:Art,&range=2018-10-01'
+
+These query parameters are very often formatted in these key=value 
+
+We have in example two of these keys: filter and range 
+
+Value of filter is tags: Art
+Value of range is October 1st, 2018
+
+The server is going to interpret this request as a request to search on the server to find out these events that are happening on 2018 or beginning in October 1st, and that somehow are tagged with the word Art
+
+If we go to that website, the server is interpreting the request as a query and it is returning info just about artistic activities that are happening starting on October 1st
+
+### REST API URLs 
+
+Request to an API is made by visiting an URL
+
+Some APIs use a different part of the HTTP protocol, called the POST mechanism, in which case not all of the requests is encoded right into the URL
+
+In HTTP, the entire request is encoded in URL
+
+For example, we got URL: https://itunes.apple.com/search?term=Ann+Arbor&entity=podcast
+
+If we copy the URL in the browser, it is either going to put the contents into a file attachment which will be downloaded, or it may just show the contents in a browser window
+
+What we get is a text in JSON format, and it can easily be converted into a Python dictionary using the json.loads() function
+
+If we break the URL apart:
+
+1) domain name in the base URL: `https://itunes.apple.com/search`
+2) character `?`
+3) key=value pairs. In this case, there are two pairs. Term and Entity, & separates two pairs
+
+We encoded in URL that we were making request to iTunes server, hence itunes.apple.com
+
+Slash search part --> we are searching something (?)
+
+We want to search for Ann Arbor --> term=Ann+Arbor
+and we wanted the podcast --> entity=podcast
+
+All the information on the website is encoded in URL and it is pretty useful for debigging 
+
+### The Requests Module
+
+requests module provide a function get and lets Python Program fetch the content of web page
+
+There are __cross site scripting restrictions__ = There can be security considerations built into most web browsers
+
+```python
+import requests
+import json
+
+page = requests.get('https://api.datamuse.com/words?rel_rhy=funny') # pass the URL get back the response object that includes the text, source of the page that lives at that URL
+print(type(page))
+print(page.text[:150]) # print first 150 characters, gives us the text attribute, content
+print(page.url) # print the url that was fetched
+
+
+x = page.json() # turn page.txt into a python object, short for json.loads(page.txt)
+print(type(x)) # list
+print(x[0]) # first element in the list
+print(json.dumps(x, indent=2)) # pretty print the results, the list
+```
+ 
 ## Packages 
 
 Packages = directory of Python Scripts
