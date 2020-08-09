@@ -1759,4 +1759,76 @@ Virtual Machine (VM) = computer simulated through software
 SSH = command to that allows user to interact with remote Linux computers
 
  
- 
+## Classes and Inheritance 
+
+### Creating Instances
+
+```python
+cities = [City(*t) for t in city_tuples] # *t means to take a tuple and expand it into a list of arguments
+```
+
+### Special methods
+
+```python
+def __add__(self, some):
+  return ClassName(self.smth + some.smth)
+```
+
+### Inheritance 
+
+```python
+class Class1(Class2):
+  def __init__(self, some1, some2):
+    Class2.__init__(self,some1,some2)
+```
+
+### Exception
+
+Try Except helps us to handle runtime errors and tell us what we need to do to when encounter one
+
+```python
+items = ['a', 'b']
+
+try:
+  print('a')
+  third = items[2]
+  print('b')
+except:
+  print('something is wrong')
+  third = False
+print('I want this to run')  # output is: a something is wrong I want this to run
+
+
+
+items = ['a','b','c']
+
+try:
+  print('a')
+  third = items[2]
+  print('b')
+except:
+  print('something is wrong')
+  third = False
+print('I want this to run') # output is: a b I want this to run
+```
+In 2nd situation there is no index out of range runtime error, therefore, it prints everything in try, but skips except block, because nothing is wrong and then usual print statement
+
+### Different Exception Types Handling
+
+```python
+items = ['a','b']
+
+try:
+  myvar = a
+  x = 10/0
+  third = items[2]
+  print('a')
+except ZeroDivisionError:
+  print('You can't divide by zero')
+except IndexError:
+  print('Index out of bounds')
+except Exception:
+  print('something else went wrong') # here, the output is this line only, because it is NameError of stating the variable name that doesn't exist on 1st line of try block
+```
+
+
